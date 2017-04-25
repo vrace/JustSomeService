@@ -31,7 +31,7 @@ std::string RestServer::Dispatch(const std::string &request)
             httpResponse = (*it)->Dispatch(*httpRequest);
         
         if (!httpResponse)
-            httpResponse = BadRequest();
+            httpResponse = DefaultResponse();
     }
     
     std::string response = _responseTranslator.Translate(*httpResponse);
@@ -43,6 +43,11 @@ std::string RestServer::Dispatch(const std::string &request)
         delete httpResponse;
     
     return response;
+}
+
+HttpResponse* RestServer::DefaultResponse()
+{
+    return new HttpResponse(HttpStatus(HTTP_STATUS_NOT_FOUND));
 }
 
 HttpResponse* RestServer::BadRequest()

@@ -9,11 +9,19 @@ std::string HttpResponseTranslator::Translate(const HttpResponse &response)
     ss << "HTTP/1.1 " << response.GetStatus() << "\r\n";
     
     const HttpHeader &header = response.GetHeader();
-    for (HttpHeader::const_iterator it = header.begin(); it != header.end(); ++it)
-        ss << it->first << ": " << it->second << "\r\n";
     
-    ss << "\r\n";
-    ss << response.GetPayload() << "\r\n";
+    if (!header.empty())
+    {
+        for (HttpHeader::const_iterator it = header.begin(); it != header.end(); ++it)
+            ss << it->first << ": " << it->second << "\r\n";
+    }
+    
+    const std::string &payload = response.GetPayload();
+    if (!payload.empty())
+    {
+        ss << "\r\n";
+        ss << response.GetPayload() << "\r\n";
+    }
     
     return ss.str();
 }

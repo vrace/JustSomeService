@@ -16,12 +16,13 @@ public:
     void AddController(RestController *controller);
     std::string Dispatch(const std::string &request);
     
+protected:
+    virtual HttpResponse* DefaultResponse();
+    HttpResponse* BadRequest();
+    
 private:
     RestServer(const RestServer&);
     RestServer& operator =(const RestServer&);
-    
-private:
-    HttpResponse* BadRequest();
     
 private:
     HttpRequestTranslator _requestTranslator;
