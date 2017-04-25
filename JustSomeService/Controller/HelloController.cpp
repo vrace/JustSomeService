@@ -1,35 +1,25 @@
 #include "HelloController.h"
-#include <vector>
-#include <sstream>
 
 namespace
 {
     const std::string SERVICE_PATH = "/hello";
 }
 
+const std::string& HelloController::GetRequestPath() const
+{
+    return SERVICE_PATH;
+}
+
 HttpResponse* HelloController::Dispatch(const HttpRequest &request)
 {
     RequestMethod method = request.GetMethod();
-    const std::string &url = request.GetURL();
+    std::vector<std::string> components = GetRequestPathComponents(request);
     
-    if (url == SERVICE_PATH || url.find(SERVICE_PATH + '/') == 0)
-    {
-        std::vector<std::string> args;
-        std::stringstream ss(url.substr(SERVICE_PATH.length()));
-        
-        std::string line;
-        while (std::getline(ss, line, '/'))
-        {
-            if (!line.empty())
-                args.push_back(line);
-        }
-        
-        if (method == REQUEST_METHOD_GET && args.empty())
-            return SayHello();
-        
-        if (method == REQUEST_METHOD_GET && args.size() == 1)
-            return SayHello(args[0]);
-    }
+    if (method == REQUEST_METHOD_GET && components.empty())
+        return SayHello();
+    
+    if (method == REQUEST_METHOD_GET && components.size() == 1)
+        return SayHello(components[0]);
     
     return NULL;
 }

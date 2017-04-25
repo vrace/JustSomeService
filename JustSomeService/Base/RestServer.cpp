@@ -28,7 +28,13 @@ std::string RestServer::Dispatch(const std::string &request)
     else
     {
         for (std::vector<RestController*>::iterator it = _controllers.begin(); !httpResponse && it != _controllers.end(); ++it)
-            httpResponse = (*it)->Dispatch(*httpRequest);
+        {
+            const std::string &requestUrl = httpRequest->GetURL();
+            const std::string &requestPath = (*it)->GetRequestPath();
+            
+            if (requestUrl == requestPath || requestUrl.find(requestPath + '/') == 0)
+                httpResponse = (*it)->Dispatch(*httpRequest);
+        }
         
         if (!httpResponse)
             httpResponse = DefaultResponse();
