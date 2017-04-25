@@ -1,8 +1,8 @@
-#include "Network/BSDSocketRestServer.h"
+#include "SomeServiceServer.h"
 
 int main()
 {
-    BSDSocketRestServer server;
+    SomeServiceServer server;
     
     if (!server.Init())
         return -1;

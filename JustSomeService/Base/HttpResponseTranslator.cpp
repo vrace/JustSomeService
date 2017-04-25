@@ -17,6 +17,7 @@ std::string HttpResponseTranslator::Translate(const HttpResponse &response)
     }
     
     const std::string &payload = response.GetPayload();
+    
     if (!payload.empty())
     {
         ss << "\r\n";
