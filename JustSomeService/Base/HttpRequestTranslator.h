@@ -3,7 +3,7 @@
 
 #include "HttpRequest.h"
 #include "HttpHeader.h"
-#include <istream>
+#include <string>
 
 class HttpRequestTranslator
 {

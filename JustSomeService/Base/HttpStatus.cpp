@@ -62,3 +62,11 @@ const std::string& HttpStatus::GetReasonPhrase() const
 {
     return _phrase;
 }
+
+std::ostream& operator <<(std::ostream &s, const HttpStatus &status)
+{
+    s << status.GetStatusCode();
+    s << ' ';
+    s << status.GetReasonPhrase();
+    return s;
+}

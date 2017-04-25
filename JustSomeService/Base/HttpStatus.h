@@ -2,6 +2,7 @@
 #define HTTP_STATUS_H
 
 #include <string>
+#include <ostream>
 
 enum HttpStatusCode
 {
@@ -33,5 +34,7 @@ private:
     HttpStatusCode _statusCode;
     std::string _phrase;
 };
+
+std::ostream& operator <<(std::ostream &s, const HttpStatus &status);
 
 #endif

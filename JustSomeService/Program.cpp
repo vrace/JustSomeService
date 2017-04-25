@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Base/HttpRequestTranslator.h"
+#include "Base/HttpResponseTranslator.h"
 
 static const char TEST_MESSAGE[] =
 "GET /hello HTTP/1.1\r\n"
@@ -15,8 +16,14 @@ static const char TEST_MESSAGE[] =
 
 int main()
 {
-    HttpRequestTranslator translator;
-    HttpRequest *request = translator.Translate(TEST_MESSAGE);
+    HttpRequestTranslator requestTranslator;
+    HttpResponseTranslator responseTranslator;
+    
+    HttpRequest *request = requestTranslator.Translate(TEST_MESSAGE);
+    
+    HttpResponse response(HttpStatus(HTTP_STATUS_OK), request->GetHeader(), "I'm the payload!");
+    std::string res = responseTranslator.Translate(response);
+    std::cout << res << std::endl;
     
     delete request;
     
