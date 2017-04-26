@@ -14,9 +14,6 @@ public:
     
     virtual const std::string& GetRequestPath() const = 0;
     virtual HttpResponse* Dispatch(const HttpRequest &request) = 0;
-    
-protected:
-    std::vector<std::string> GetRequestPathComponents(const HttpRequest &request);
 };
 
 #endif

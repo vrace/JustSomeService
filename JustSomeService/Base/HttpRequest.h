@@ -2,6 +2,7 @@
 #define HTTP_REQUEST_H
 
 #include "RequestMethod.h"
+#include "RequestURL.h"
 #include "HttpHeader.h"
 #include <string>
 
@@ -20,6 +21,8 @@ public:
     const std::string& GetURL() const;
     const HttpHeader& GetHeader() const;
     const std::string& GetPayload() const;
+    
+    RequestURL GetURL(const std::string &requestPath) const;
     
 private:
     RequestMethod _method;

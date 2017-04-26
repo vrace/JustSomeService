@@ -13,13 +13,16 @@ const std::string& HelloController::GetRequestPath() const
 HttpResponse* HelloController::Dispatch(const HttpRequest &request)
 {
     RequestMethod method = request.GetMethod();
-    std::vector<std::string> components = GetRequestPathComponents(request);
+    RequestURL url = request.GetURL(SERVICE_PATH);
     
-    if (method == REQUEST_METHOD_GET && components.empty())
-        return SayHello();
-    
-    if (method == REQUEST_METHOD_GET && components.size() == 1)
-        return SayHello(components[0]);
+    if (url)
+    {
+        if (method == REQUEST_METHOD_GET && url.GetComponentSize() == 0)
+            return SayHello();
+        
+        if (method == REQUEST_METHOD_GET && url.GetComponentSize() == 1)
+            return SayHello(url[0]);
+    }
     
     return NULL;
 }

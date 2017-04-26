@@ -54,3 +54,8 @@ const std::string& HttpRequest::GetPayload() const
 {
     return _payload;
 }
+
+RequestURL HttpRequest::GetURL(const std::string &requestPath) const
+{
+    return RequestURL(_url, requestPath);
+}
