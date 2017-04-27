@@ -11,8 +11,6 @@ class RestController
 public:
     RestController();
     virtual ~RestController();
-    
-    virtual const std::string& GetRequestPath() const = 0;
     virtual HttpResponse* Dispatch(const HttpRequest &request) = 0;
 };
 

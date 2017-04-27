@@ -2,16 +2,15 @@
 #include <stdlib.h>
 #include <sstream>
 
-const std::string& RollController::GetRequestPath() const
+namespace
 {
-    static std::string requestPath = "/roll";
-    return requestPath;
+    const std::string REQUEST_PATH = "/roll";
 }
 
 HttpResponse* RollController::Dispatch(const HttpRequest &request)
 {
     RequestMethod method = request.GetMethod();
-    RequestURL url = request.GetURL(GetRequestPath());
+    RequestURL url = request.GetURL(REQUEST_PATH);
     
     if (url)
     {

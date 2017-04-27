@@ -8,7 +8,6 @@ class HelloController : public RestController
 {
 public:
     virtual HttpResponse* Dispatch(const HttpRequest &request);
-    virtual const std::string& GetRequestPath() const;
     
 private:
     HttpResponse* SayHello();

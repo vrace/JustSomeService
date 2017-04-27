@@ -5,11 +5,6 @@ namespace
     const std::string SERVICE_PATH = "/hello";
 }
 
-const std::string& HelloController::GetRequestPath() const
-{
-    return SERVICE_PATH;
-}
-
 HttpResponse* HelloController::Dispatch(const HttpRequest &request)
 {
     RequestMethod method = request.GetMethod();

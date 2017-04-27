@@ -8,7 +8,6 @@ class RollController : public RestController
 {
 public:
     virtual HttpResponse* Dispatch(const HttpRequest &request);
-    virtual const std::string& GetRequestPath() const;
     
 private:
     HttpResponse* Roll();
