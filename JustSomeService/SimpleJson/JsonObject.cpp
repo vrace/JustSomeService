@@ -44,3 +44,8 @@ void JsonObject::Put(const std::string &key, const std::string &value)
 {
 	(*this)[key] = new JsonString(value);
 }
+
+void JsonObject::Put(const std::string &key, JsonArray *arr)
+{
+    (*this)[key] = arr;
+}

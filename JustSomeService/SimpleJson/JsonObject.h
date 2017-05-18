@@ -3,6 +3,7 @@
 
 #include "JsonValue.h"
 #include "JsonString.h"
+#include "JsonArray.h"
 #include <map>
 
 class JsonObject
@@ -16,6 +17,7 @@ public:
 	const std::string& GetContentType() const;
 
 	void Put(const std::string &key, const std::string &value);
+    void Put(const std::string &key, JsonArray *arr);
 
 private:
 	JsonObject(const JsonObject&);
